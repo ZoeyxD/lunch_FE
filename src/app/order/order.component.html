@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lunch Order Form</title>
+</head>
+
+<body>
+
+<h1>Lunch Order Form</h1>
+
+<form id="lunchOrderForm" (ngSubmit)="onSubmit()">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" required [(ngModel)]="orderData.name"><br><br>
+
+  <label for="surname">Surname:</label>
+  <input type="text" id="surname" name="surname" required [(ngModel)]="orderData.surname"><br><br>
+
+  <label for="date">Date:</label>
+  <input type="date" id="date" name="date" required [(ngModel)]="selectedDate"><br><br>
+
+  <label for="soup">Soup:</label>
+  <input type="text" id="soup" name="soup" required [(ngModel)]="orderData.soup"><br><br>
+
+  <label for="mainMeal">Main Meal:</label>
+  <input type="text" id="mainMeal" name="mainMeal" required [(ngModel)]="orderData.mainMeal"><br><br>
+
+  <button type="submit">Submit Order</button>
+
+</form>
+</body>
+</html>
