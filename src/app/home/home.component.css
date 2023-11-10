@@ -1,14 +1,7 @@
-.success-page {
-  text-align: center;
-  padding: 20px;
-  background-color: #4CAF50;
-  color: #fff;
+.home-container{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  color: #424242;
 }
 
-.success-page h1 {
-  font-size: 2em;
-}
-
-.success-page p {
-  font-size: 1.2em;
-}

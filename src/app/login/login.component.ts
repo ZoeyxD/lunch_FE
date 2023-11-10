@@ -8,7 +8,7 @@ import { ApiService } from '../services/api.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   username: string = '';
@@ -28,6 +28,9 @@ export class LoginComponent {
 
       // Call the service to set isLoggedIn to true
       this.loginService.login();
+
+      // Update LoginService with the username
+      this.loginService.updateUsername(this.username);
 
     } else {
       // Authentication failed, display an error message.

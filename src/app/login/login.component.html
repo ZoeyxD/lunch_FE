@@ -7,26 +7,28 @@
 </head>
 
 <body>
+<div class="login-page">
 <div class="login-container">
-  <h2>Login</h2>
+  <h2>Lunch Controller</h2>
   <form (ngSubmit)="onSubmit()">
 
     <div class="input-group">
-      <label for="username">Username:</label>
-      <input type="text" id="username" [(ngModel)]="username" name="username" required autocomplete="current-username">
+      <label for="username" class="sr-only"></label>
+      <input type="text" id="username" [(ngModel)]="username" name="username" required placeholder="Username" autocomplete="current-username">
     </div>
 
     <div class="input-group">
-      <label for="password">Password:</label>
-      <input type="password" id="password" [(ngModel)]="password" name="password" required autocomplete="current-password">
+      <label for="password" class="sr-only"></label>
+      <input type="password" id="password" [(ngModel)]="password" name="password" required placeholder="Password" autocomplete="current-password">
     </div>
 
     <div class="input-group">
-      <button type="submit">Login</button>
+      <button type="submit">Log In</button>
     </div>
 
   </form>
   <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+</div>
 </div>
 </body>
 </html>

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
@@ -14,6 +13,13 @@ import { OrderComponent } from './order/order.component';
 import { LunchByDateComponent } from './lunch-by-date/lunch-by-date.component';
 import { SettingsComponent } from './settings/settings.component';
 import { MailComponent } from './mail/mail.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faUser, faCircle } from '@fortawesome/free-solid-svg-icons';
+import {NgOptimizedImage} from "@angular/common";
+
+library.add(faUser, faCircle);
 
 const routes = [
   { path: 'home', component: HomeComponent },
@@ -42,9 +48,11 @@ const routes = [
     FormsModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule,
+    NgOptimizedImage
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
