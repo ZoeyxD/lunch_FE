@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {Router} from "@angular/router";
-import { ApiService, OrderData } from '../services/api.service';
+import { ApiService, OrderData } from '../../services/api.service';
 @Component({
   selector: 'app-lunch-by-date',
   templateUrl: './lunch-by-date.component.html',

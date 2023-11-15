@@ -1,0 +1,27 @@
+<h1>See Menu For Selected Day </h1>
+<div class="select-day">
+  <form (ngSubmit)="getMenuForDay()">
+
+    <label for="day">Day: </label>
+      <select id="day" name="day" [(ngModel)]="selectedDay">
+      <option value="MONDAY">Monday</option>
+      <option value="TUESDAY">Tuesday</option>
+      <option value="WEDNESDAY">Wednesday</option>
+      <option value="THURSDAY">Thursday</option>
+      <option value="FRIDAY">Friday</option>
+      </select>
+
+    <button type="button" (click)="getMenuForDay()">Get Menu</button>
+
+    <h2>{{ selectedDay }}</h2>
+    <p>Soup: <span id = "soup">{{ menu.soup.join(', ') }}</span></p>
+    <p>Main Meal:</p>
+
+    <ul>
+      <li *ngFor="let item of menu.mainMeal">
+        {{ item }}
+      </li>
+    </ul>
+  </form>
+</div>
+

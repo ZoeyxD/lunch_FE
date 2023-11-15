@@ -1,0 +1,33 @@
+.display {
+  color: #424242;
+  font-size: 13px;
+  width: 90%;
+}
+
+h1 {
+  margin: 30px 0 20px 50px;
+  font-size: 18px;
+  border-bottom: 2px solid;
+  border-image: linear-gradient(to right, #424242, transparent) 1;
+}
+
+.weekly-menu{
+  width: 100%;
+  margin-left: 50px;
+  max-height: 555px;
+  overflow-y: auto;
+}
+
+ul {
+  list-style-type: none; /* Removes the bullet points */
+  padding: 0;
+  margin: 0;
+}
+
+li b {
+  font-weight: bold;
+}
+
+li p {
+  font-style: italic;
+}

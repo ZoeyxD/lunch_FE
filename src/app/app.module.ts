@@ -3,21 +3,21 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './Components/login/login.component';
+import { HomeComponent } from './Components/home/home.component';
 import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from '@angular/forms';
-import { MenuComponent } from './menu/menu.component';
-import { ReturnMenuComponent } from './menu/return-menu/return-menu.component';
-import { OrderComponent } from './order/order.component';
-import { LunchByDateComponent } from './lunch-by-date/lunch-by-date.component';
-import { SettingsComponent } from './settings/settings.component';
-import { MailComponent } from './mail/mail.component';
+import { MenuComponent } from './Components/menu/menu.component';
+import { ReturnMenuComponent } from './Components/return-menu/return-menu.component';
+import { OrderComponent } from './Components/order/order.component';
+import { LunchByDateComponent } from './Components/lunch-by-date/lunch-by-date.component';
+import { SettingsComponent } from './Components/settings/settings.component';
+import { MailComponent } from './Components/mail/mail.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUser, faCircle } from '@fortawesome/free-solid-svg-icons';
-import {NgOptimizedImage} from "@angular/common";
+import {NgOptimizedImage,DatePipe} from "@angular/common";
 
 library.add(faUser, faCircle);
 
@@ -52,7 +52,7 @@ const routes = [
     FontAwesomeModule,
     NgOptimizedImage
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

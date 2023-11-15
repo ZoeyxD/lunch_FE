@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiService } from '../services/api.service';
+import { ApiService } from '../../services/api.service';
 
-import { Menu } from '../services/api.service'; // Import the Menu interface from menu.service
+import { Menu } from '../../services/api.service'; // Import the Menu interface from menu.service
 
 @Component({
   selector: 'app-menu',

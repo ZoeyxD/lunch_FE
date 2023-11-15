@@ -1,15 +1,17 @@
+<h1>Ordered Lunches</h1>
+<div class="display">
 <div class="date-picker">
   <label for="selectedDate">Select a date:</label>
   <input type="date" id="selectedDate" [(ngModel)]="selectedDate" name="selectedDate">
+<button (click)="fetchOrderedLunches()">Fetch</button>
 </div>
-<button (click)="fetchOrderedLunches()">Fetch Ordered Lunches</button>
-
 <!-- Display ordered lunches -->
 <div *ngIf="orderedLunches">
-  <h2>Ordered Lunches for {{ selectedDate | date: 'yyyy-MM-dd' }}</h2>
   <ul>
     <li *ngFor="let lunch of orderedLunches">
+      <h2>{{ selectedDate | date: 'yyyy-MM-dd' }}</h2>
       {{ lunch.name }} - {{ lunch.surname }} - {{ lunch.soup }} - {{ lunch.mainMeal }}
     </li>
   </ul>
+</div>
 </div>

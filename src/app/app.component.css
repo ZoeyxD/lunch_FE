@@ -21,7 +21,7 @@ body {
   align-items: stretch;
 }
 
-.main-screen { /* parent to top-bar + display */
+.main-screen { /* parent to top-bar + main */
   background-color: #fff;
   flex: 1;
 }
@@ -46,15 +46,6 @@ body {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-
-}
-
-.display {
-  padding: 10px 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
 }
 
 .side-bar {
@@ -83,11 +74,10 @@ body {
 }
 
 .menu-selection button {
-  width: 100%;
+  width: 180px;
   background-color: transparent;
   color: #424242;
-  padding: 15px;
-
+  padding: 15px 15px 15px 30px;
   border: none;
   cursor: pointer;
   text-align: left;
@@ -113,4 +103,5 @@ body {
 
 #logoutButton:hover {
   opacity: 1;
+  width: 100%;
 }

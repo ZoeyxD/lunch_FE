@@ -1,5 +1,6 @@
 <!-- settings.component.html -->
 <h1>Change Password</h1>
+<div class = "change-password">
 <form [formGroup]="changePasswordForm" (ngSubmit)="onSubmit()">
   <label for="username">Username:</label>
   <input type="text" id="username" formControlName="username"><br><br>
@@ -12,3 +13,4 @@
 
   <button type="submit">Change Password</button>
 </form>
+</div>

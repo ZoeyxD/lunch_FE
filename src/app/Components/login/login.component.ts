@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from '../services/login.service';
-import { ApiService } from '../services/api.service';
+import { LoginService } from '../../services/login.service';
+import { ApiService } from '../../services/api.service';
 
 
 

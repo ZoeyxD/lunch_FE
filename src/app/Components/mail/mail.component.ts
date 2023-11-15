@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiService } from '../services/api.service';
+import { ApiService } from '../../services/api.service';
+import { DateService } from '../../services/date.service';
 
 @Component({
   selector: 'app-mail',
@@ -8,7 +9,7 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./mail.component.css']
 })
 export class MailComponent {
-  constructor(public router: Router, private apiService: ApiService) {}
+  constructor(public router: Router, private apiService: ApiService, private dateService: DateService) {}
 
   sendMail() {
     this.apiService.sendMail().subscribe(
@@ -22,6 +23,11 @@ export class MailComponent {
         window.alert('Error sending email: ' + error.message);
       }
     );
+  }
+
+  // Use the public getter method in the template
+  get currentDate(): string {
+    return this.dateService.currentDate;
   }
 
 }
