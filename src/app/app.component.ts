@@ -56,5 +56,11 @@ export class AppComponent {
     {
       this.router.navigate(['/mail']); //navigate to weekly order page
     }
+
+    navigateToHome(){
+      this.router.navigate(['/home']);
+    }
+
+
   }
 

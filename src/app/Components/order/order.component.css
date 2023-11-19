@@ -1,6 +1,6 @@
 h1 {
   width: 90%;
-  margin: 30px 0 50px 50px;
+  margin: 30px 0 40px 50px;
   font-size: 18px;
   border-bottom: 2px solid;
   border-image: linear-gradient(to right, #424242, transparent) 1;
@@ -10,6 +10,7 @@ h1 {
   font-size: 13px;
   margin-left: 50px;
   color: #424242;
+  width: 90%;
 }
 
 

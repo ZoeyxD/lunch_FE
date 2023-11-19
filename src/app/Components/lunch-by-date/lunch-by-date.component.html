@@ -1,17 +1,26 @@
 <h1>Ordered Lunches</h1>
 <div class="display">
 <div class="date-picker">
-  <label for="selectedDate">Select a date:</label>
+  <label for="selectedDate">Select date: </label>
   <input type="date" id="selectedDate" [(ngModel)]="selectedDate" name="selectedDate">
-<button (click)="fetchOrderedLunches()">Fetch</button>
+  <button (click)="fetchOrderedLunches()">Show</button>
 </div>
-<!-- Display ordered lunches -->
-<div *ngIf="orderedLunches">
+
+  <!-- Display ordered lunches -->
+<div *ngIf="orderedLunches && orderedLunches.length > 0; else noLunches">
+  <h2>{{ selectedDate | date: 'EEEE, MMMM d, y' }}</h2>
+  <div class="scroll-container">
   <ul>
     <li *ngFor="let lunch of orderedLunches">
-      <h2>{{ selectedDate | date: 'yyyy-MM-dd' }}</h2>
       {{ lunch.name }} - {{ lunch.surname }} - {{ lunch.soup }} - {{ lunch.mainMeal }}
     </li>
   </ul>
+  </div>
 </div>
+
+  <ng-template #noLunches>
+    <h2 *ngIf="orderedLunches !== null">{{ selectedDate | date: 'EEEE, MMMM d, y' }}</h2>
+    <p *ngIf="orderedLunches !== null">No lunches ordered.</p>
+  </ng-template>
+
 </div>

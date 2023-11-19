@@ -1,6 +1,6 @@
 <h1>See Menu For Selected Day </h1>
 <div class="select-day">
-  <form (ngSubmit)="getMenuForDay()">
+  <form>
 
     <label for="day">Day: </label>
       <select id="day" name="day" [(ngModel)]="selectedDay">
@@ -13,15 +13,24 @@
 
     <button type="button" (click)="getMenuForDay()">Get Menu</button>
 
-    <h2>{{ selectedDay }}</h2>
-    <p>Soup: <span id = "soup">{{ menu.soup.join(', ') }}</span></p>
-    <p>Main Meal:</p>
+    <div *ngIf="selectedDay && menu">
+      <h2>{{ calculateFormattedDate() }}</h2>
 
-    <ul>
-      <li *ngFor="let item of menu.mainMeal">
-        {{ item }}
-      </li>
-    </ul>
+      <p *ngIf="menu.soup.length > 0">Soup: <span id="soup">{{ menu.soup.join(', ') }}</span></p>
+
+      <p *ngIf="menu.mainMeal.length > 0">Main Meal:</p>
+      <ul *ngIf="menu.mainMeal.length > 0">
+        <li *ngFor="let item of menu.mainMeal">
+          {{ item }}
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="selectedDay && noMenuAvailable">
+      <div *ngFor="let item of weeklyMenu">
+        <p id = "info" *ngIf="item.den === selectedDay">{{ item.balenie }}</p>
+      </div>
+    </div>
   </form>
 </div>
 

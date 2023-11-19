@@ -1,4 +1,31 @@
 <h1> Welcome </h1>
 <div class="home-container">
-<b> Today is  {{ currentDate }}</b>
+<h2>Today is  {{ currentDate }}</h2>
+
+    <div *ngIf="noMenusToday">
+        <p>There are no menus today.</p>
+    </div>
+
+    <div *ngIf="!noMenusToday">
+        <ul>
+            <li *ngFor="let item of todaysMenu.mainMeal">
+                {{ item }}
+            </li>
+        </ul>
+    </div>
+
+    <button (click)="fetchTodaysOrders()">Show orders</button>
+    <div *ngIf="todaysOrders && todaysOrders.length > 0; else noLunches" class="scroll-container">
+        <ul>
+            <li *ngFor="let lunch of todaysOrders">
+                {{ lunch.name }} - {{ lunch.surname }} - {{ lunch.soup }} - {{ lunch.mainMeal }}
+            </li>
+        </ul>
+    </div>
+
+    <ng-template #noLunches>
+        <ul *ngIf="todaysOrders !== null"></ul>
+        <p *ngIf="todaysOrders !== null">No lunches ordered for today.</p>
+    </ng-template>
+
 </div>

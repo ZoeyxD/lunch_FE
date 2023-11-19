@@ -1,6 +1,15 @@
 <h1>Send Email</h1>
-<div class = send-email>
-<p> Send restaurant an email with lunches ordered for today: </p>
-  <b>{{ currentDate }}</b> <br />
-   <button (click)="sendMail()">Send</button>
+<div class="send-email">
+<h2>{{ currentDate }}</h2>
+
+<!-- Display the "Send" button only if there are orders for today -->
+<div *ngIf="hasOrderedLunchesForToday; else noOrders">
+    <p> Send restaurant an email with lunches ordered for today: </p>
+    <button (click)="sendMail()">Send Email</button>
+</div>
+
+<ng-template #noOrders>
+    <!-- Display a message if there are no orders for today -->
+    <p>No orders to send.</p>
+</ng-template>
 </div>

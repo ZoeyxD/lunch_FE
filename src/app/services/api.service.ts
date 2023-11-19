@@ -53,11 +53,16 @@ export class ApiService {
     return this.http.post(this.orderUrl, orderData, { headers });
   }
 
-  exportList(inDate: Date): Observable<OrderData[]> {
+  exportOrders(inDate: Date): Observable<OrderData[]> {
     // Construct the URL with the "inDate" parameter as a query parameter
     const urlWithParams = `${this.listUrl}?inDate=${inDate}`;
 
     // Make an API request to retrieve the list of ordered lunches for the specified date
+    return this.http.get<OrderData[]>(urlWithParams);
+  }
+
+  checkOrders(inDate: String): Observable<OrderData[]> {
+    const urlWithParams = `${this.listUrl}?inDate=${inDate}`;
     return this.http.get<OrderData[]>(urlWithParams);
   }
 

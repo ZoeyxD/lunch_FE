@@ -34,7 +34,7 @@
    <div class="main-screen">
      <div class="top-bar">
        <img ng-optimized-image [ngSrc]="'assets/imgs/logo.png'" alt="Logo" class="logo" height="43.57" width="80">
-       <h3>Lunch Controller</h3>
+       <h3 (click)="navigateToHome()">Lunch Controller</h3>
      </div>
      <router-outlet *ngIf="loginService.isLoggedIn"></router-outlet> <!-- This is where the routed components will be displayed -->
    </div>

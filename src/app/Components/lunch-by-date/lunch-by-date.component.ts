@@ -6,19 +6,18 @@ import { ApiService, OrderData } from '../../services/api.service';
   templateUrl: './lunch-by-date.component.html',
   styleUrls: ['./lunch-by-date.component.css']
 })
+
 export class LunchByDateComponent {
 
-  // Define a property to hold the user-selected date
   selectedDate: Date;
-  orderedLunches: OrderData[] = [];
+  orderedLunches: OrderData[] | null = null;
 
   constructor(public router: Router, private apiService: ApiService) {
     this.selectedDate = new Date();
   }
 
   fetchOrderedLunches() {
-
-    this.apiService.exportList(this.selectedDate).subscribe(
+    this.apiService.exportOrders(this.selectedDate).subscribe(
       (data) => {
         this.orderedLunches = data;
       },
