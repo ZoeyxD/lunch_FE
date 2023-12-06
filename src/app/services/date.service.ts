@@ -32,9 +32,10 @@ export class DateService {
     }
 
     // method to format the current date into format "MONDAY"
-    formatDayOfWeek(): string {
-        const dayOfWeek = this.datePipe.transform(new Date(), 'EEEE');
-        return dayOfWeek !== null ? dayOfWeek.toUpperCase() : '';
+  formatDayOfWeek(isTomorrow: boolean = false): string {
+    const targetDate = isTomorrow ? new Date(new Date().getTime() + 24 * 60 * 60 * 1000) : new Date();
+    const dayOfWeek = this.datePipe.transform(targetDate, 'EEEE');
+    return dayOfWeek !== null ? dayOfWeek.toUpperCase() : '';
     }
 
     // method to determine day of the week

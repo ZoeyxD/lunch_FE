@@ -16,9 +16,16 @@ h1 {
 button {
   width: 100px;
   margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 h2{
   margin-bottom: 20px;
   font-size: 14px;
+}
+
+.scroll-container {
+  width: 100%;
+  max-height: 365px;
+  overflow-y: auto;
 }

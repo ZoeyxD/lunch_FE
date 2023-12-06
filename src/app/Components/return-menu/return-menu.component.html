@@ -26,6 +26,7 @@
       </ul>
     </div>
 
+    <!-- if no menu is available today (=true), display why -->
     <div *ngIf="selectedDay && noMenuAvailable">
       <div *ngFor="let item of weeklyMenu">
         <p id = "info" *ngIf="item.den === selectedDay">{{ item.balenie }}</p>

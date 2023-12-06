@@ -1,0 +1,38 @@
+<h1> Welcome </h1>
+<div class="home-container">
+<h2>Today is  {{ currentDate }}</h2>
+
+    <div *ngIf="noMenusToday">
+        <p>No menus available.</p>
+      <!-- Display why no menu is available today -->
+      <div *ngFor="let item of weeklyMenu">
+        <p id="info" *ngIf="item.den === dateService.formatDayOfWeek()">{{ item.balenie }}</p>
+      </div>
+    </div>
+
+    <div *ngIf="!noMenusToday">
+      <p *ngIf="todaysMenu.soup.length > 0">Soup: <span id="soup">{{ todaysMenu.soup.join(', ') }}</span></p>
+      <ul>
+          <li *ngFor="let item of todaysMenu.mainMeal">
+                {{ item }}
+            </li>
+        </ul>
+    </div>
+
+  <div>Orders for current day can be made until 10:30 am. After this time you need to call VINOM SVETE !</div>
+
+  <button *ngIf="!noMenusToday && isInCutoffTime()" (click)="navigateToOrder()">Order</button>
+  <button *ngIf="!noMenusToday" (click)="fetchTodaysOrders()">Show orders</button>
+  <button *ngIf="!noMenusToday && isInCutoffTime() && isBefore3pm()" (click)="navigateToSendMail()">Send orders</button>
+  <div *ngIf="todaysOrders && todaysOrders.length > 0; else noLunches" class="scroll-container">
+    <ul>
+      <li *ngFor="let lunch of todaysOrders">
+        {{ lunch.name }} - {{ lunch.surname }} - {{ lunch.soup }} - {{ lunch.mainMeal }}
+      </li>
+    </ul>
+  </div>
+  <ng-template #noLunches>
+        <ul *ngIf="todaysOrders !== null"></ul>
+        <p *ngIf="todaysOrders !== null">No lunches ordered for today.</p>
+  </ng-template>
+</div>

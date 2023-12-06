@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
-import { OrderCheckService } from '../../services/order-check.service';
+import { CheckerService } from '../../services/checker.service';
 import { DateService } from '../../services/date.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class MailComponent implements OnInit {
   hasOrderedLunchesForToday: boolean= false;
   constructor(public router: Router,
               private apiService: ApiService,
-              private orderCheckService: OrderCheckService,
+              private orderCheckService: CheckerService,
               private dateService: DateService) {}
 
   ngOnInit() {

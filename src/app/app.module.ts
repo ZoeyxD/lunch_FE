@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Components/login/login.component';
-import { HomeComponent } from './Components/home/home.component';
+import { WelcomeComponent } from './Components/welcome/welcome.component';
 import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from '@angular/forms';
 import { MenuComponent } from './Components/menu/menu.component';
@@ -22,7 +22,7 @@ import {NgOptimizedImage,DatePipe} from "@angular/common";
 library.add(faUser, faCircle);
 
 const routes = [
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: WelcomeComponent },
   { path: 'menu', component: MenuComponent },
   { path: 'return-menu', component: ReturnMenuComponent },
   { path: 'order', component: OrderComponent },
@@ -35,7 +35,7 @@ const routes = [
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent,
+    WelcomeComponent,
     MenuComponent,
     ReturnMenuComponent,
     OrderComponent,
