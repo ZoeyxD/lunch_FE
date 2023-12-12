@@ -21,7 +21,7 @@ export class ReturnMenuComponent {
               private apiService: ApiService,
               private dateService: DateService,
               private orderCheckService: CheckerService) {
-    this.apiService.selectDay = this.selectedDay; //passing data from component to service
+              this.apiService.selectDay = this.selectedDay; //passing data from component to service
   }
 
 

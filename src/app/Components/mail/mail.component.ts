@@ -11,12 +11,14 @@ import { DateService } from '../../services/date.service';
 })
 export class MailComponent implements OnInit {
   hasOrderedLunchesForToday: boolean= false;
+  public currentDate: string = '';
   constructor(public router: Router,
               private apiService: ApiService,
               private orderCheckService: CheckerService,
               private dateService: DateService) {}
 
   ngOnInit() {
+    this.currentDate = this.dateService.formatTodayDate();
     this.orderCheckService.hasOrderedLunchesForToday$.subscribe(
         (hasOrderedLunches) => {
           this.hasOrderedLunchesForToday = hasOrderedLunches;
@@ -38,8 +40,5 @@ export class MailComponent implements OnInit {
       );
   }
 
-  // Use the public getter method in the template
-  get currentDate(): string {
-    return this.dateService.currentDate;
-  }
+
 }

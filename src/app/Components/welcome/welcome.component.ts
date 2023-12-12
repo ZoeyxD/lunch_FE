@@ -14,27 +14,24 @@ export class WelcomeComponent implements OnInit {
   public todaysMenu: ReturnMenu = { soup: [], mainMeal: [] };
   public noMenusToday: boolean = false; // Flag to indicate whether no menu is available
   public weeklyMenu: Menu[] = [];
+  public tomorrowDate: string = '';
+  public tomorrowsOrders: OrderData[] | null = null;
+  public currentDate: string = '';
 
   constructor(public router: Router,
               public dateService: DateService,
               private apiService: ApiService,
               private checkerService: CheckerService) {}
 
-  // the public getter method to get the current date -> to be used in the template
-  get currentDate(): string {
-    return this.dateService.currentDate;
-  }
 
-  fetchTodaysOrders() {
-    // make API request to retrieve orders made for today
-    this.apiService.checkOrders(this.checkerService.today).subscribe(
-        (data) => {
-          this.todaysOrders = data;
-        },
-        (error) => {
-          console.error("Error fetching today's orders:", error);
-        }
-    );
+  ngOnInit(): void {
+    //display today's date in full format
+    this.currentDate = this.dateService.formatTodayDate();
+    this.fetchTodaysMenu();
+    // Subscribe to the weeklyMenu$ observable to be displayed in the template
+    this.checkerService.weeklyMenu$.subscribe((weeklyMenu) => {
+      this.weeklyMenu = weeklyMenu;
+    });
   }
 
   fetchTodaysMenu() {
@@ -54,7 +51,11 @@ export class WelcomeComponent implements OnInit {
       this.apiService.requestMenuForDay(this.dateService.formatDayOfWeek(true)).subscribe((data: any) => {
         this.todaysMenu = data;
         this.noMenusToday = this.checkerService.checkMenuAvailability(this.todaysMenu);
+        // Set tomorrow's formatted date
+        this.tomorrowDate = this.dateService.formatTomorrowDate();
+
       });
+
     } else {
 
       // make API request to fetch the menu for today
@@ -71,33 +72,53 @@ export class WelcomeComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-    this.fetchTodaysMenu();
-      // Subscribe to the weeklyMenu$ observable to be displayed in the template
-      this.checkerService.weeklyMenu$.subscribe((weeklyMenu) => {
-          this.weeklyMenu = weeklyMenu;
-      });
+  fetchTodaysOrders() {
+    const currentHour = new Date().getHours();
+
+    // make API request to retrieve orders made for today if it's before 3pm
+    if (currentHour < 15) {
+      this.apiService.checkOrders(this.checkerService.today).subscribe(
+        (data) => {
+          this.todaysOrders = data;
+          this.tomorrowsOrders = null;
+        },
+        (error) => {
+          console.error("Error fetching today's orders:", error);
+        }
+      );
+
+    } else {
+      // make API request to retrieve orders made for tomorrow
+      this.apiService.checkOrders(this.checkerService.tomorrow).subscribe(
+        (data) => {
+          this.todaysOrders = data;
+          this.tomorrowsOrders = null;
+        },
+        (error) => {
+          console.error("Error fetching today's orders:", error);
+        }
+      );
+    }
   }
 
   navigateToOrder(){
-        this.router.navigate(['/order']);
+    this.router.navigate(['/order']);
   }
 
-  navigateToSendMail()
-  {
-    this.router.navigate(['/mail']); //navigate to weekly order page
+  navigateToSendMail() {
+    this.router.navigate(['/mail']);
   }
 
-  // Method to check if the current time is before 10:30 am
-  isInCutoffTime(): boolean {
+  // Method to check if the current time is before 10:30am
+  //for elements (mail button) that are supposed to be displayed only in the morning
+  isMorning(): boolean {
     const currentHour = new Date().getHours();
-    const MorningCutoff = currentHour < 10 || (currentHour === 10 && new Date().getMinutes() < 30);
-    const AfternoonCutoff = currentHour >= 15;
-    return MorningCutoff || AfternoonCutoff;
+    return currentHour < 10 || (currentHour === 10 && new Date().getMinutes() < 30);
   }
 
-  isBefore3pm(): boolean {
+  // Method to check if the current time is after 3pm
+  isAfternoon(): boolean {
     const currentHour = new Date().getHours();
-    return currentHour < 15;
+    return currentHour >= 15;
   }
 }
