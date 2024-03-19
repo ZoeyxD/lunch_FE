@@ -7,7 +7,7 @@
   <input type="text" id="surname" name="surname" required [(ngModel)]="orderData.surname"><br><br>
 
   <label for="date">Date:</label>
-  <input type="date" id="date" name="date" required [(ngModel)]="selectedDate"><br><br>
+  <input type="date" id="date" name="date" required [(ngModel)]="selectedDate" (ngModelChange)="checkMenu()"><br><br>
 
   <label for="soup">Soup:</label>
   <input type="text" id="soup" name="soup" required [(ngModel)]="orderData.soup"><br><br>
@@ -15,7 +15,7 @@
   <label for="mainMeal">Main Meal:</label>
   <input type="text" id="mainMeal" name="mainMeal" required [(ngModel)]="orderData.mainMeal"><br><br>
 
-  <button type="submit">Submit Order</button>
+  <button type="submit" *ngIf="!noMenuAvailable">Submit Order</button>
 </form>
 
 

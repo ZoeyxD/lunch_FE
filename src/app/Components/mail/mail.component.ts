@@ -12,20 +12,33 @@ import { DateService } from '../../services/date.service';
 export class MailComponent implements OnInit {
   hasOrderedLunchesForToday: boolean= false;
   public currentDate: string = '';
+
+
   constructor(public router: Router,
               private apiService: ApiService,
-              private orderCheckService: CheckerService,
+              private checkerService: CheckerService,
               private dateService: DateService) {}
 
+
+
   ngOnInit() {
+    //retrieves current date from DateService
     this.currentDate = this.dateService.formatTodayDate();
-    this.orderCheckService.hasOrderedLunchesForToday$.subscribe(
+    //checks whether there are any orders for today
+    this.checkerService.hasOrderedLunchesForToday$.subscribe(
         (hasOrderedLunches) => {
           this.hasOrderedLunchesForToday = hasOrderedLunches;
         }
     );
   }
 
+  // Method to check if the current time is before 10:30am
+  isMorning(): boolean {
+    return this.checkerService.isMorning();
+  }
+
+
+  //method to make API request to send email with previously ordered lunches
   sendMail() {
       this.apiService.sendMail().subscribe(
         (response) => {
@@ -39,6 +52,5 @@ export class MailComponent implements OnInit {
         }
       );
   }
-
 
 }

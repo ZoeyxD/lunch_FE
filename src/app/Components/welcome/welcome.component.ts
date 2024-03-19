@@ -110,7 +110,7 @@ export class WelcomeComponent implements OnInit {
   }
 
   // Method to check if the current time is before 10:30am
-  //for elements (mail button) that are supposed to be displayed only in the morning
+  // for elements (mail button) that are supposed to be displayed only in the morning
   isMorning(): boolean {
     const currentHour = new Date().getHours();
     return currentHour < 10 || (currentHour === 10 && new Date().getMinutes() < 30);

@@ -5,7 +5,6 @@ import { DatePipe } from '@angular/common';
   providedIn: 'root'
 })
 export class DateService {
-  private _currentDate: string = '';
   constructor(private datePipe: DatePipe) {}
 
   // method to get today's date in the desired format
@@ -30,27 +29,39 @@ export class DateService {
     return dayOfWeek !== null ? dayOfWeek.toUpperCase() : '';
   }
 
+  //method to format selected date into format "EEEE" i.e. "MONDAY"
+  formatSelectedDayOfWeek(selectedDate: Date): string {
+    const dayOfWeek = this.datePipe.transform(selectedDate, 'EEEE');
+    return dayOfWeek !== null ? dayOfWeek.toUpperCase() : '';
+  }
+
+
   // method to determine day of the week
   getDayOfWeek(): number {
         const currentDate = new Date();
         return currentDate.getDay();
   }
 
-  /* method to reset the week on friday
-  -> prevents displaying this week's menu during weekends (menu-by-day), displays next week instead */
+  /* method to format selected day ("EEEE") into a date within the current week
+  -> used (in return-menu); prevents displaying this week's menu after friday and displays next week instead */
   calculateDateFromDayOfWeek(selectedDay: string): string {
     const today = new Date();
 
-    // Adjust the current day of the week to consider the week reset on Friday midnight
+    // set the current day of the week to consider the week reset on Friday midnight
     const currentDayOfWeek = (today.getDay() + 6) % 7;
 
     const selectedDayIndex = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY']
-            .indexOf(selectedDay);
+      .indexOf(selectedDay);
 
-    const difference = selectedDayIndex - currentDayOfWeek;
+    let difference = selectedDayIndex - currentDayOfWeek;
+``
+    // If the current day is after Friday, move to the next week
+    if (currentDayOfWeek > 4) {
+      difference += 7;
+    }
 
-    // If the selected day is in the current week, use the current date; otherwise, use the next week
-    const targetDate = new Date(today.setDate(today.getDate() + difference + (difference < 0 ? 7 : 0)));
+    // Calculate the target date by adding the difference in days to today
+    const targetDate = new Date(today.setDate(today.getDate() + difference));
 
     // Use Angular DatePipe to format the date
     return this.datePipe.transform(targetDate, 'fullDate')!; // Adding '!' asserts that the result won't be null

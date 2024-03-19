@@ -3,13 +3,14 @@
 <h2>{{ currentDate }}</h2>
 
 <!-- Display the "Send" button only if there are orders for today -->
-<div *ngIf="hasOrderedLunchesForToday; else noOrders">
+<div *ngIf="hasOrderedLunchesForToday && isMorning(); else noOrders">
     <p> Send restaurant an email with lunches ordered for today: </p>
     <button (click)="sendMail()">Send Email</button>
 </div>
 
 <ng-template #noOrders>
-    <!-- Display a message if there are no orders for today -->
-    <p>No orders to send.</p>
+    <!-- Display a message if there are no orders for today or it's after the cutoff time -->
+  <p *ngIf="!isMorning()">Orders cannot be made after 10:30 am.</p>
+  <p *ngIf="!hasOrderedLunchesForToday">No orders to send.</p>
 </ng-template>
 </div>

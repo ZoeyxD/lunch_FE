@@ -25,10 +25,10 @@ export class CheckerService {
     this.tomorrow = this.formatDate(tomorrowDate);
 
     // Check if there are ordered lunches for today
-    this.checkOrderedLunchesForToday();
+    //this.checkOrderedLunchesForToday();
   }
 
-  checkOrderedLunchesForToday() {
+ /* checkOrderedLunchesForToday() {
     this.apiService.checkOrders(this.today).subscribe(
         (data: OrderData[]) => {
           const hasOrderedLunches = data !== null && data.length > 0;
@@ -38,7 +38,7 @@ export class CheckerService {
           console.error('Error fetching ordered lunches:', error);
         }
     );
-  }
+  }*/
 
 
   checkMenuAvailability(menu: { soup: any[]; mainMeal: any[] }): boolean {
@@ -47,7 +47,7 @@ export class CheckerService {
   }
 
     getWeeklyMenu() {
-      // make API request to retrieve this week's menu (all) - this will be used in case no menu on a given day is available
+      // make API request to retrieve this week's menu (all) - to be used to display the reason in case no menu on a given day is available
       this.apiService.requestMenuData().subscribe(
             (data) => {
                 this._weeklyMenuSource.next(data);
@@ -59,6 +59,18 @@ export class CheckerService {
             }
         );
     }
+
+  // Method to check if the current time is before 10:30am
+  isMorning(): boolean {
+    const currentHour = new Date().getHours();
+    return currentHour < 10 || (currentHour === 10 && new Date().getMinutes() < 30);
+  }
+
+  // Method to check if the current time is after 3pm
+  /*isAfternoon(): boolean {
+    const currentHour = new Date().getHours();
+    return currentHour >= 15;
+  }*/
 
   private formatDate(date: Date): string {
     // Format the date as yyyy-mm-dd

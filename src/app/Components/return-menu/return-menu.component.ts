@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {ReturnMenu, ApiService, Menu} from '../../services/api.service';
 import { DateService } from '../../services/date.service';
@@ -20,7 +20,7 @@ export class ReturnMenuComponent {
   constructor(public router: Router,
               private apiService: ApiService,
               private dateService: DateService,
-              private orderCheckService: CheckerService) {
+              private CheckerService: CheckerService) {
               this.apiService.selectDay = this.selectedDay; //passing data from component to service
   }
 
@@ -36,14 +36,14 @@ export class ReturnMenuComponent {
             (data: any) => {
                 this.menu = data;
                 // Use CheckerService method to check if retrieved menu contains any data
-                this.noMenuAvailable = this.orderCheckService.checkMenuAvailability(this.menu);
+                this.noMenuAvailable = this.CheckerService.checkMenuAvailability(this.menu);
 
                 // if there's no data, noMenuAvailable = true -> Fetch weekly menu (contains info on why no menu)
                 if (this.noMenuAvailable) {
-                    this.orderCheckService.getWeeklyMenu();
+                    this.CheckerService.getWeeklyMenu();
 
                     // Subscribe to the weeklyMenu$ observable to be displayed in the template
-                    this.orderCheckService.weeklyMenu$.subscribe((weeklyMenu) => {
+                    this.CheckerService.weeklyMenu$.subscribe((weeklyMenu) => {
                         this.weeklyMenu = weeklyMenu;
                         /* item.balenie in weeklyMenu contains info on why menu is not available
                         -> to be displayed in template instead of menu data */
